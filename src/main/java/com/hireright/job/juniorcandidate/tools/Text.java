@@ -16,10 +16,7 @@ public class Text {
     }
 
     public void removeTags() {
-        text = text.replaceAll("<script type=\"text/javascript\">.+</script>", "");
-        System.out.println("1" + text);
         text = text.replaceAll("<[^>]*>", "").replaceAll("\\s+", " ");
-        System.out.println("2" + text);
     }
 
     private String createRegularCopy(String string) {
@@ -60,7 +57,7 @@ public class Text {
         int endIndex = 0;
         for (int index = positionOfWordInText; index < text.length(); index++) {
             sym = text.charAt(index);
-            if ('!' == sym || '?' == sym || '.' == sym) {
+            if ('!' == sym || '?' == sym || '.' == sym){
                 endIndex = index;
             }
         }
@@ -68,7 +65,7 @@ public class Text {
         int beginIndex = 0;
         for (int index = positionOfWordInText; index != 0; index--) {
             sym = text.charAt(index);
-            if ('!' == sym || '?' == sym || '.' == sym) {
+            if ('!' == sym || '?' == sym || '.' == sym){
                 beginIndex = index + 2;
             }
         }

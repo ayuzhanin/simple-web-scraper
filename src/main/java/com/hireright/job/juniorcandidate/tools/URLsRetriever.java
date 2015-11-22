@@ -32,14 +32,16 @@ public class URLsRetriever {
         if (file.exists() && !file.isDirectory()) {
             try {
                 urls = retrieveURLsFromFile(path);
-            } finally {
+            } catch (RetrievingException e) {
                 urls.clear();
+                throw new RetrievingException("Invalid url");
             }
         } else {
             try {
                 urls.add(new URL(path));
-            } finally {
+            } catch (IOException e) {
                 urls.clear();
+                throw new RetrievingException("Invalid url");
             }
         }
         return urls;
