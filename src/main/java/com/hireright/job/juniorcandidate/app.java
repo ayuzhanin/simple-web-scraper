@@ -8,10 +8,9 @@ public class app {
 
     public static void main(String... args) throws IOException {
 
-        //String str = "http://www.oracle.com/";
-
         Container container = new Container();
         container.process(args);
+
 
     }
 }

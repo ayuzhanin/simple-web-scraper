@@ -23,7 +23,7 @@ public class Container {
                 if (verbosity) {
                     startTime = System.currentTimeMillis();
                 }
-                int counter = holder.getText().countWord(word);
+                int counter = holder.getText().countWordOccurrences(word);
                 System.out.println("Word's '" + word + "' occurrence: " + counter + '\n');
                 if (verbosity) {
                     endTime = System.currentTimeMillis();
@@ -61,7 +61,7 @@ public class Container {
                 if (verbosity) {
                     startTime = System.currentTimeMillis();
                 }
-                List<String> sentences = holder.getText().extractSentences(word);
+                Set<String> sentences = holder.getText().extractAllSentencesWithGivenWord(word);
                 System.out.println("Sentences with word '" + word + "': \n");
                 sentences.forEach(System.out::println);
                 if (verbosity) {

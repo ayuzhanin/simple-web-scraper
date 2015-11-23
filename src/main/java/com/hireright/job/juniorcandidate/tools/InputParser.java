@@ -14,7 +14,7 @@ public class InputParser {
     private List<String> words;
     private HashMap<Character, Boolean> flagsMap = null;
 
-    public InputParser(){
+    public InputParser() {
         flagsMap = new HashMap<>();
         for (char aFlagsChar : flagsChar) {
             flagsMap.put(aFlagsChar, false);
@@ -61,18 +61,20 @@ public class InputParser {
         int counter = 0;
         for (int index = parts.length - 1; index >= 0; index--) {
             String trimmed = parts[index].trim();
-            if (trimmed.length() == 2) {
-                if (isProperFlag(trimmed.charAt(1))) {
-                    flagsBuilder.append(trimmed);
-                    counter++;
-                } else {
-                    break;
-                }
+            if (trimmed.length() == 2 && isProperFlag(trimmed.charAt(1))) {
+                flagsBuilder.append(trimmed);
+                counter++;
             } else {
                 break;
             }
         }
-        words.addAll(Arrays.asList(parts).subList(0, parts.length - counter));
+
+        StringBuilder lastWords = new StringBuilder();
+        for (int index = 0; index < parts.length - counter; index++) {
+            lastWords.append(parts[index]).append(" ");
+        }
+
+        words.add(lastWords.toString());
         flags = flagsBuilder.toString().replaceAll("\\s*", "");
     }
 

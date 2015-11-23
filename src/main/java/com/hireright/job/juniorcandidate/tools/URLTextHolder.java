@@ -25,7 +25,7 @@ public class URLTextHolder {
             }
             reader.close();
             text = new Text(builder.toString());
-            text.removeTags();
+            text.removeHTMLTags();
         } catch (MalformedURLException exception) {
             throw new RetrievingException("retrieveTextFromURL(" + url.toString() + "): Malformed URL exception has occurred\n");
         } catch (IOException exception) {

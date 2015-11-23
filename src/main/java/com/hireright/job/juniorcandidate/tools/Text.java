@@ -1,8 +1,9 @@
 package com.hireright.job.juniorcandidate.tools;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Text {
     private String text = null;
@@ -11,75 +12,74 @@ public class Text {
         this.text = text;
     }
 
-    public String getText() {
-        return text;
-    }
+    private final static Set<Integer> treeForSorting = new TreeSet<>();
 
-    public void removeTags() {
+    public void removeHTMLTags() {
         text = text.replaceAll("<[^>]*>", "").replaceAll("\\s+", " ");
+        System.out.println(text);
     }
 
-    private String createRegularCopy(String string) {
+    private String createCaseInsensitiveCopy(String string) {
         StringBuilder regular = new StringBuilder();
-        char c;
-        c = string.charAt(0);
-        regular.append("[").append(c).append(Character.toUpperCase(c)).append("]");
-        for (int index = 1; index < string.length(); index++) {
-            c = string.charAt(index);
-            regular.append("[").append(c).append(Character.toUpperCase(c)).append("]");
+        char symbol;
+        for (int index = 0; index < string.length(); index++) {
+            symbol = string.charAt(index);
+            regular.append("[").append(Character.toLowerCase(symbol)).append(Character.toUpperCase(symbol)).append("]");
         }
-        System.out.println(regular);
         return regular.toString();
     }
 
-    public int countWord(String word) {
-        String replaced = text.replaceAll(createRegularCopy(word), "");
+    public int countWordOccurrences(String word) {
+        String replaced = text.replaceAll(createCaseInsensitiveCopy(word), "");
         return (text.length() - replaced.length()) / word.length();
-    }
-
-    public int countWordGreedily(String word) {
-        int index = 0;
-        int occurance = 0;
-        String regWord = createRegularCopy(word);
-        while ((index = text.indexOf(regWord, index)) != -1 && index < text.length()) {
-            index += word.length();
-            occurance++;
-        }
-        return occurance;
     }
 
     public int countCharacters() {
         return text.length();
     }
 
-    private String extractSentence(int positionOfWordInText) {
-        char sym;
-        int endIndex = 0;
-        for (int index = positionOfWordInText; index < text.length(); index++) {
-            sym = text.charAt(index);
-            if ('!' == sym || '?' == sym || '.' == sym){
-                endIndex = index;
-            }
-        }
-
-        int beginIndex = 0;
-        for (int index = positionOfWordInText; index != 0; index--) {
-            sym = text.charAt(index);
-            if ('!' == sym || '?' == sym || '.' == sym){
-                beginIndex = index + 2;
-            }
-        }
-
-        return text.substring(beginIndex, endIndex);
+    private int findMin(int a, int b, int c) {
+        return (a < b) ? (a < c ? a : (c < b ? c : b)) : (b < c ? b : (c < a ? c : a));
     }
 
-    public List<String> extractSentences(String givenWord) {
-        List<String> sentences = new ArrayList<>();
-        String regWord = createRegularCopy(givenWord);
+    private int endIndOfSentenceWithWord(int positionOfWord) {
+        int indexOfEnd = text.indexOf("!", positionOfWord);
+        int indOfExclamation = (indexOfEnd != -1) ? indexOfEnd : Integer.MAX_VALUE;
+        indexOfEnd = text.indexOf("?", positionOfWord);
+        int indOfQuestion = (indexOfEnd != -1) ? indexOfEnd : Integer.MAX_VALUE;
+        indexOfEnd = text.indexOf(".", positionOfWord);
+        int indOfFullStop = (indexOfEnd != -1) ? indexOfEnd : Integer.MAX_VALUE;
+
+        return findMin(indOfExclamation, indOfQuestion, indOfFullStop);
+    }
+
+    private int startIndOfSentenceWithWord(int positionOfWord) {
+        String substrWithBeginnig = text.substring(0, positionOfWord);
+
+        int indexOfStart = substrWithBeginnig.lastIndexOf("!");
+        int indOfExclamation = (indexOfStart != -1) ? indexOfStart : 0;
+        indexOfStart = substrWithBeginnig.lastIndexOf("?");
+        int indOfQuestion = (indexOfStart != -1) ? indexOfStart : 0;
+        indexOfStart = substrWithBeginnig.lastIndexOf(".");
+        int indOfFullStop = (indexOfStart != -1) ? indexOfStart : 0;
+        return - 1 * findMin(-1 * indOfExclamation, -1 * indOfQuestion, - 1 * indOfFullStop);
+    }
+
+    private String extractSentenceWithGivenWord(int positionOfGivenWord) {
+        int endIndex = endIndOfSentenceWithWord(positionOfGivenWord);
+        int beginIndex = startIndOfSentenceWithWord(positionOfGivenWord);
+        if (beginIndex != 0){
+            beginIndex++;
+        }
+        return text.substring(beginIndex, endIndex + 1).trim();
+    }
+
+    public Set<String> extractAllSentencesWithGivenWord(String word) {
+        Set<String> sentences = new HashSet<>();
         int index = 0;
-        while ((index = text.indexOf(regWord, index)) != -1 && index < text.length()) {
-            index += givenWord.length();
-            sentences.add(extractSentence(index));
+        while ((index = text.indexOf(word, index)) != -1 && index < text.length()) {
+            sentences.add(extractSentenceWithGivenWord(index));
+            index += word.length();
         }
         return sentences;
     }
