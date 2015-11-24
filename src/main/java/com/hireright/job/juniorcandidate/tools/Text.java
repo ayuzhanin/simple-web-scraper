@@ -1,9 +1,7 @@
 package com.hireright.job.juniorcandidate.tools;
 
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Text {
     private String text = null;
@@ -11,8 +9,6 @@ public class Text {
     public Text(String text) {
         this.text = text;
     }
-
-    private final static Set<Integer> treeForSorting = new TreeSet<>();
 
     public void removeHTMLTags() {
         text = text.replaceAll("<[^>]*>", "").replaceAll("\\s+", " ");
@@ -62,24 +58,33 @@ public class Text {
         int indOfQuestion = (indexOfStart != -1) ? indexOfStart : 0;
         indexOfStart = substrWithBeginnig.lastIndexOf(".");
         int indOfFullStop = (indexOfStart != -1) ? indexOfStart : 0;
-        return - 1 * findMin(-1 * indOfExclamation, -1 * indOfQuestion, - 1 * indOfFullStop);
+        return -1 * findMin(-1 * indOfExclamation, -1 * indOfQuestion, -1 * indOfFullStop);
     }
 
-    private String extractSentenceWithGivenWord(int positionOfGivenWord) {
-        int endIndex = endIndOfSentenceWithWord(positionOfGivenWord);
-        int beginIndex = startIndOfSentenceWithWord(positionOfGivenWord);
-        if (beginIndex != 0){
+    public String extractSentenceWithWord(int positionOfWord) {
+        int endIndex = endIndOfSentenceWithWord(positionOfWord);
+        int beginIndex = startIndOfSentenceWithWord(positionOfWord);
+        if (beginIndex != 0) {
             beginIndex++;
         }
         return text.substring(beginIndex, endIndex + 1).trim();
     }
 
-    public Set<String> extractAllSentencesWithGivenWord(String word) {
+    public Set<String> extractAllSentencesWithWord(String word) {
         Set<String> sentences = new HashSet<>();
         int index = 0;
         while ((index = text.indexOf(word, index)) != -1 && index < text.length()) {
-            sentences.add(extractSentenceWithGivenWord(index));
+            sentences.add(extractSentenceWithWord(index));
             index += word.length();
+        }
+        return sentences;
+    }
+
+    public Map<String, Set<String>> extractAllSentencesWithSeveralWords(List<String> words) {
+        Map<String, Set<String>> sentences = new HashMap<>();
+        for (String word : words) {
+            Set<String> sentencesForSingleWord = extractAllSentencesWithWord(word);
+            sentences.put(word, sentencesForSingleWord);
         }
         return sentences;
     }

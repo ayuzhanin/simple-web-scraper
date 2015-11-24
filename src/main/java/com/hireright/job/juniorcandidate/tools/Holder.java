@@ -8,11 +8,11 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class URLTextHolder {
+public class Holder {
     private Text text = null;
     private URL url = null;
 
-    public URLTextHolder(URL url) {
+    public Holder(URL url) {
         this.url = url;
     }
 

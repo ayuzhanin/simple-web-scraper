@@ -7,7 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class URLsRetriever {
+public class URLRetriever {
 
     private static List<URL> retrieveURLsFromFile(String pathToFile) throws RetrievingException {
         String inputLine = "";

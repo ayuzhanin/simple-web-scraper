@@ -7,48 +7,47 @@ import java.util.*;
 
 public class InputParser {
 
-    private final static char[] flagsChar = {'v', 'w', 'c', 'e'};
-
-    private String path;
-    private String flags;
+    private String pathToURL;
+    private String stringOfFlags;
     private List<String> words;
-    private HashMap<Character, Boolean> flagsMap = null;
+
+    public final static HashMap<Flag, Boolean> flags = new HashMap<>();
 
     public InputParser() {
-        flagsMap = new HashMap<>();
-        for (char aFlagsChar : flagsChar) {
-            flagsMap.put(aFlagsChar, false);
-        }
         words = new ArrayList<>();
     }
 
-    public HashMap<Character, Boolean> getFlagsMap() {
-        return flagsMap;
+    static {
+        for (char flag : Flag.LEGAL_FLAGS) {
+            flags.put(new Flag(flag), false);
+        }
     }
 
-    public String getPath() {
-        return path;
+    public String getPathToURL() {
+        return pathToURL;
     }
 
     public List<String> getWords() {
         return words;
     }
 
-    private boolean isProperFlag(char c) {
-        return flagsMap.containsKey(c);
+    private boolean isProperFlag(char flagToCheck) {
+        Flag flag = new Flag(flagToCheck);
+        return flag.isProperFlag();
     }
 
-    private void setMentionedFlag(char flagToMention) {
-        flagsMap.put(flagToMention, true);
+    private void setFlagMentioned(char flagToMention) {
+        flags.put(new Flag(flagToMention), true);
     }
 
     private void parseFlags() throws ParsingException {
-        flags = flags.replaceAll("(-|–)", "");
-        for (int index = 0; index < flags.length(); index++) {
-            if (isProperFlag(flags.charAt(index))) {
-                setMentionedFlag(flags.charAt(index));
+        stringOfFlags = stringOfFlags.replaceAll("(-|–)", "");
+        for (int index = 0; index < stringOfFlags.length(); index++) {
+            char currentFlag = stringOfFlags.charAt(index);
+            if (isProperFlag(currentFlag)) {
+                setFlagMentioned(currentFlag);
             } else {
-                throw new ParsingException("Unknown flag: " + flags.charAt(index) + "\n");
+                throw new ParsingException("Unknown flag: " + currentFlag + "\n");
             }
         }
     }
@@ -75,14 +74,14 @@ public class InputParser {
         }
 
         words.add(lastWords.toString());
-        flags = flagsBuilder.toString().replaceAll("\\s*", "");
+        stringOfFlags = flagsBuilder.toString().replaceAll("\\s*", "");
     }
 
     private void splitPathAndFirstWords() {
         String str = words.get(0);
         words.remove(0);
         words.add(0, str.substring(str.indexOf(" ") + 1, str.length()));
-        path = str.substring(0, str.indexOf(" "));
+        pathToURL = str.substring(0, str.indexOf(" "));
     }
 
     private void parseToWords(String... args) {
