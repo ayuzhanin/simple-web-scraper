@@ -8,15 +8,15 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Holder {
+public class TextAndURLHolder {
     private Text text = null;
     private URL url = null;
 
-    public Holder(URL url) {
+    public TextAndURLHolder(URL url) {
         this.url = url;
     }
 
-    public void retrieveTextFromURL() throws ParsingException {
+    public void retrieveCleanTextFromURL() throws ParsingException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()))) {
             String inputLine;
             StringBuilder builder = new StringBuilder();
@@ -25,11 +25,9 @@ public class Holder {
             }
             reader.close();
             text = new Text(builder.toString());
-            text.removeHTMLTags();
-        } catch (MalformedURLException exception) {
-            throw new ParsingException("retrieveTextFromURL(" + url.toString() + "): Malformed URL exception has occurred\n");
+            text.clean();
         } catch (IOException exception) {
-            throw new ParsingException("retrieveTextFromURL(" + url.toString() + "): I/O exception while retrieving data from URL has occurred\n");
+            throw new ParsingException("I/O exception while retrieving data from URL " + url.toString() + " has occurred\n");
         }
     }
 

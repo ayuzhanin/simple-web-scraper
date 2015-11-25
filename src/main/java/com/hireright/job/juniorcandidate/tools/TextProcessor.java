@@ -14,67 +14,71 @@ public class TextProcessor {
         }
     }
 
-    private void countWords(Holder holder, List<String> words) {
+    private void countWords(TextAndURLHolder textAndURLHolder, List<String> words) {
         for (String word : words) {
-            int counter = holder.getText().countWordOccurrences(word);
-            System.out.println(holder.getUrl().toString() + " word's '" + word + "': " + counter + " occurrence");
+            int counter = textAndURLHolder.getText().countWordOccurrences(word);
+            System.out.println(textAndURLHolder.getUrl().toString() + " word '" + word + "': " + counter + " occurrence");
         }
     }
 
-    private void countWordsOccurenceInTexts(List<Holder> holders, List<String> words) {
-        boolean countWordsOccurence = Parser.FLAGS.get(new Flag(Flag.Values.COUNT_WORDS_OCCURENCE));
+    private void countWordsOccurenceInTexts(List<TextAndURLHolder> textAndURLHolders, List<String> words) {
+        boolean countWordsOccurence = Parser.FLAGS.get(new Flag(Flag.Values.COUNT_WORDS_OCCURENCES));
         if (countWordsOccurence) {
-            printVerbose("Start counting words...");
+            printVerbose("Counting words...");
             long startTime = verbose ? System.currentTimeMillis() : 0;
-            holders.forEach(holder -> countWords(holder, words));
-            long endTime = verbose ? startTime - System.currentTimeMillis() : 0;
+            textAndURLHolders.forEach(holder -> countWords(holder, words));
+            long endTime = verbose ? System.currentTimeMillis() : 0;
             printVerbose("Elapsed time: " + (endTime - startTime) + " ms");
         }
     }
 
-    private void countCharacters(Holder holder) {
-        int counter = holder.getText().countCharacters();
-        System.out.println(holder.getUrl().toString() + " contains " + counter + " characters");
+    private void countCharacters(TextAndURLHolder textAndURLHolder) {
+        int counter = textAndURLHolder.getText().countCharacters();
+        System.out.println(textAndURLHolder.getUrl().toString() + " contains " + counter + " characters");
     }
 
-    private void countCharacters(List<Holder> holders) {
+    private void countCharacters(List<TextAndURLHolder> textAndURLHolders) {
         boolean countCharactersOfPage = Parser.FLAGS.get(new Flag(Flag.Values.COUNT_CHARACTERS_OF_PAGE));
         if (countCharactersOfPage) {
-            printVerbose("Start counting characters...");
+            printVerbose("Counting characters...");
             long startTime = verbose ? System.currentTimeMillis() : 0;
-            holders.forEach(this::countCharacters);
-            long endTime = verbose ? startTime - System.currentTimeMillis() : 0;
+            textAndURLHolders.forEach(this::countCharacters);
+            long endTime = verbose ? System.currentTimeMillis() : 0;
             printVerbose("Elapsed time: " + (endTime - startTime) + " ms");
         }
     }
 
     private void printWordAndSentences(String word, Set<String> sentences) {
-        System.out.println("Sentences with word " + word);
-        sentences.forEach(System.out::println);
+        System.out.println("Sentences with word '" + word + "':");
+        //sentences.forEach(System.out::println);
+        int index = 1;
+        for (String sentence : sentences){
+            System.out.println(index + ". " + sentence);
+            index++;
+        }
     }
 
-    private void extractAllSentencesWithSeveralWords(Holder holder, List<String> words) {
-        Map<String, Set<String>> wordSentencesDict = holder.getText().extractAllSentencesWithSeveralWords(words);
-        System.out.println("Processing :" + holder.getUrl().toString());
+    private void extractAllSentencesWithSeveralWords(TextAndURLHolder textAndURLHolder, List<String> words) {
+        Map<String, Set<String>> wordSentencesDict = textAndURLHolder.getText().extractAllSentencesWithSeveralWords(words);
         Set<String> keys = wordSentencesDict.keySet();
         keys.forEach(key -> printWordAndSentences(key, wordSentencesDict.get(key)));
     }
 
-    private void extractAllSentencesWithSeveralWords(List<Holder> holders, List<String> words) {
+    private void extractAllSentencesWithSeveralWords(List<TextAndURLHolder> textAndURLHolders, List<String> words) {
         boolean extractSentencesWithWord = Parser.FLAGS.get(new Flag(Flag.Values.EXTRACT_SENTENCES_WITH_WORD));
         if (extractSentencesWithWord) {
-            printVerbose("Start extracting sentences...");
+            printVerbose("Extracting sentences...");
             long startTime = verbose ? System.currentTimeMillis() : 0;
-            holders.forEach(holder -> extractAllSentencesWithSeveralWords(holder, words));
-            long endTime = verbose ? startTime - System.currentTimeMillis() : 0;
+            textAndURLHolders.forEach(holder -> extractAllSentencesWithSeveralWords(holder, words));
+            long endTime = verbose ? System.currentTimeMillis() : 0;
             printVerbose("Elapsed time: " + (endTime - startTime) + " ms");
         }
     }
 
-    public void run(List<Holder> holders, List<String> words) {
+    public void run(List<TextAndURLHolder> textAndURLHolders, List<String> words) {
         verbose = Parser.FLAGS.get(new Flag(Flag.Values.VERBOSE));
-        countWordsOccurenceInTexts(holders, words);
-        countCharacters(holders);
-        extractAllSentencesWithSeveralWords(holders, words);
+        countWordsOccurenceInTexts(textAndURLHolders, words);
+        countCharacters(textAndURLHolders);
+        extractAllSentencesWithSeveralWords(textAndURLHolders, words);
     }
 }

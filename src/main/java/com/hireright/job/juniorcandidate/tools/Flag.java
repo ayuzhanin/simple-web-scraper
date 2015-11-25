@@ -8,7 +8,7 @@ public class Flag {
     public enum Values {
 
         VERBOSE(LEGAL_FLAGS[0]),
-        COUNT_WORDS_OCCURENCE(LEGAL_FLAGS[1]),
+        COUNT_WORDS_OCCURENCES(LEGAL_FLAGS[1]),
         COUNT_CHARACTERS_OF_PAGE(LEGAL_FLAGS[2]),
         EXTRACT_SENTENCES_WITH_WORD(LEGAL_FLAGS[3]),
         NOT_DEFINED(ILLEGAL_FLAG);
@@ -36,7 +36,7 @@ public class Flag {
                 values = Values.VERBOSE;
                 break;
             case 'w':
-                values = Values.COUNT_WORDS_OCCURENCE;
+                values = Values.COUNT_WORDS_OCCURENCES;
                 break;
             case 'c':
                 values = Values.COUNT_CHARACTERS_OF_PAGE;

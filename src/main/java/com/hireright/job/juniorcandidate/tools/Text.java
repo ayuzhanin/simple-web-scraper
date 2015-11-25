@@ -10,9 +10,8 @@ public class Text {
         this.text = text;
     }
 
-    public void removeHTMLTags() {
-        text = text.replaceAll("<[^>]*>", "").replaceAll("\\s+", " ");
-        System.out.println(text);
+    public void clean() {
+        text = new TextCleaner().run(text);
     }
 
     private String createCaseInsensitiveCopy(String string) {

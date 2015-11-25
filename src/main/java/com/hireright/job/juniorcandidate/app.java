@@ -6,11 +6,16 @@ import java.io.IOException;
 
 public class app {
 
-    public static void main(String... args) throws IOException {
+    public static void main(String... args)  {
 
         SimpleWebScraper simpleWebScraper = new SimpleWebScraper();
-        simpleWebScraper.process(args);
-
+        try {
+            simpleWebScraper.process(args);
+        }
+        catch (IOException exc){
+            System.out.println(exc.getMessage());
+            exc.printStackTrace();
+        }
 
     }
 }

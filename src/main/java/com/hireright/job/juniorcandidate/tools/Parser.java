@@ -77,7 +77,7 @@ public class Parser {
             lastWords.append(parts[index]).append(" ");
         }
 
-        words.add(lastWords.toString());
+        words.add(lastWords.toString().trim());
         stringOfFlags = flagsBuilder.toString().replaceAll("\\s*", "");
     }
 
@@ -103,26 +103,34 @@ public class Parser {
         }
     }
 
-    public void parseURLs() throws IOException {
+    public void parseURLs() throws ParsingException {
         File file = new File(pathToURL);
-        String inputLine;
-        String errorMessage = pathToURL + " file not found";
-        try (BufferedReader reader = new BufferedReader(new FileReader(pathToURL))) {
-            if (file.exists() && !file.isDirectory()) {
+        String inputLine = "";
+        if (file.exists() && !file.isDirectory()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(pathToURL))) {
                 while ((inputLine = reader.readLine()) != null) {
-                    errorMessage = inputLine + " invalid URL found while retrieving URLs from file";
                     URLs.add(new URL(inputLine));
                 }
                 reader.close();
-            } else {
-                errorMessage = pathToURL + " invalid URL found while retrieving URLs from file";
+            } catch (MalformedURLException exception) {
+                URLs.clear();
+                throw new ParsingException(inputLine + " invalid URL found while retrieving URLs from file");
+            } catch (FileNotFoundException exception) {
+                URLs.clear();
+                throw new ParsingException("File " + pathToURL + " not found");
+            } catch (IOException exception) {
+                URLs.clear();
+                throw new ParsingException("IOException occurred");
+            }
+        } else {
+            try {
                 URLs.add(new URL(pathToURL));
+            } catch (MalformedURLException exception) {
+                URLs.clear();
+                throw new ParsingException(pathToURL + " invalid URL");
             }
         }
-        catch (MalformedURLException | FileNotFoundException exception){
-            URLs.clear();
-            throw new ParsingException(errorMessage);
-        }
+
     }
 
     public void parse(String... args) throws IOException {
