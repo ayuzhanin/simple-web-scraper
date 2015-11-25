@@ -8,14 +8,35 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class TextAndURLHolder {
+/**
+ * Класс, предназаначенный для хранения URL ссылки и текста, содержащегося по этой ссылке.
+ *
+ * @author Artur Yuzhanin.
+ */
+public class TextURLHolder {
+    /**
+     * Текст, полученный по ссылке.
+     */
     private Text text = null;
+    /**
+     * СсылкаЮ необходимая для получения текста.
+     */
     private URL url = null;
 
-    public TextAndURLHolder(URL url) {
+    /**
+     * Конструктор.
+     *
+     * @param url ссылка на страницу в сети.
+     */
+    public TextURLHolder(URL url) {
         this.url = url;
     }
 
+    /**
+     * Функция для получаения чистого текста из веб-страницы.
+     *
+     * @throws ParsingException, если невозможно получить данные со страницы.
+     */
     public void retrieveCleanTextFromURL() throws ParsingException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()))) {
             String inputLine;
