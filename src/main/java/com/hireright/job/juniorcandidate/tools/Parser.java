@@ -2,49 +2,53 @@ package com.hireright.job.juniorcandidate.tools;
 
 import com.hireright.job.juniorcandidate.exception.ParsingException;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 
-public class InputParser {
+public class Parser {
 
     private String pathToURL;
     private String stringOfFlags;
     private List<String> words;
+    private List<URL> URLs;
 
-    public final static HashMap<Flag, Boolean> flags = new HashMap<>();
+    public final static HashMap<Flag, Boolean> FLAGS = new HashMap<>();
 
-    public InputParser() {
+    public Parser() {
         words = new ArrayList<>();
+        URLs = new ArrayList<>();
     }
 
     static {
         for (char flag : Flag.LEGAL_FLAGS) {
-            flags.put(new Flag(flag), false);
+            FLAGS.put(new Flag(flag), false);
         }
     }
 
-    public String getPathToURL() {
-        return pathToURL;
+    public List<URL> getURLs() {
+        return URLs;
     }
 
     public List<String> getWords() {
         return words;
     }
 
-    private boolean isProperFlag(char flagToCheck) {
+    private boolean isLegalFlag(char flagToCheck) {
         Flag flag = new Flag(flagToCheck);
-        return flag.isProperFlag();
+        return flag.isLegalFlag();
     }
 
     private void setFlagMentioned(char flagToMention) {
-        flags.put(new Flag(flagToMention), true);
+        FLAGS.put(new Flag(flagToMention), true);
     }
 
     private void parseFlags() throws ParsingException {
         stringOfFlags = stringOfFlags.replaceAll("(-|–)", "");
         for (int index = 0; index < stringOfFlags.length(); index++) {
             char currentFlag = stringOfFlags.charAt(index);
-            if (isProperFlag(currentFlag)) {
+            if (isLegalFlag(currentFlag)) {
                 setFlagMentioned(currentFlag);
             } else {
                 throw new ParsingException("Unknown flag: " + currentFlag + "\n");
@@ -60,7 +64,7 @@ public class InputParser {
         int counter = 0;
         for (int index = parts.length - 1; index >= 0; index--) {
             String trimmed = parts[index].trim();
-            if (trimmed.length() == 2 && isProperFlag(trimmed.charAt(1))) {
+            if (trimmed.length() == 2 && isLegalFlag(trimmed.charAt(1))) {
                 flagsBuilder.append(trimmed);
                 counter++;
             } else {
@@ -84,7 +88,7 @@ public class InputParser {
         pathToURL = str.substring(0, str.indexOf(" "));
     }
 
-    private void parseToWords(String... args) {
+    private void putArgsToWords(String... args) {
         StringBuilder inputBuilder = new StringBuilder();
         char delimeter = '|';
         for (String arg : args) {
@@ -99,10 +103,33 @@ public class InputParser {
         }
     }
 
+    public void parseURLs() throws IOException {
+        File file = new File(pathToURL);
+        String inputLine;
+        String errorMessage = pathToURL + " file not found";
+        try (BufferedReader reader = new BufferedReader(new FileReader(pathToURL))) {
+            if (file.exists() && !file.isDirectory()) {
+                while ((inputLine = reader.readLine()) != null) {
+                    errorMessage = inputLine + " invalid URL found while retrieving URLs from file";
+                    URLs.add(new URL(inputLine));
+                }
+                reader.close();
+            } else {
+                errorMessage = pathToURL + " invalid URL found while retrieving URLs from file";
+                URLs.add(new URL(pathToURL));
+            }
+        }
+        catch (MalformedURLException | FileNotFoundException exception){
+            URLs.clear();
+            throw new ParsingException(errorMessage);
+        }
+    }
+
     public void parse(String... args) throws IOException {
-        parseToWords(args);
+        putArgsToWords(args);
         splitPathAndFirstWords();
         splitLastWordsAndFlags();
         parseFlags();
+        parseURLs();
     }
 }

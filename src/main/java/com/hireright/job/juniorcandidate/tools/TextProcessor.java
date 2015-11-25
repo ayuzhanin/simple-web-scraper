@@ -9,7 +9,6 @@ public class TextProcessor {
     private boolean verbose;
 
     private void printVerbose(String message) {
-        boolean verbose = InputParser.flags.get(new Flag(Flag.Values.VERBOSE));
         if (verbose) {
             System.out.println(message);
         }
@@ -22,9 +21,31 @@ public class TextProcessor {
         }
     }
 
+    private void countWordsOccurenceInTexts(List<Holder> holders, List<String> words) {
+        boolean countWordsOccurence = Parser.FLAGS.get(new Flag(Flag.Values.COUNT_WORDS_OCCURENCE));
+        if (countWordsOccurence) {
+            printVerbose("Start counting words...");
+            long startTime = verbose ? System.currentTimeMillis() : 0;
+            holders.forEach(holder -> countWords(holder, words));
+            long endTime = verbose ? startTime - System.currentTimeMillis() : 0;
+            printVerbose("Elapsed time: " + (endTime - startTime) + " ms");
+        }
+    }
+
     private void countCharacters(Holder holder) {
         int counter = holder.getText().countCharacters();
         System.out.println(holder.getUrl().toString() + " contains " + counter + " characters");
+    }
+
+    private void countCharacters(List<Holder> holders) {
+        boolean countCharactersOfPage = Parser.FLAGS.get(new Flag(Flag.Values.COUNT_CHARACTERS_OF_PAGE));
+        if (countCharactersOfPage) {
+            printVerbose("Start counting characters...");
+            long startTime = verbose ? System.currentTimeMillis() : 0;
+            holders.forEach(this::countCharacters);
+            long endTime = verbose ? startTime - System.currentTimeMillis() : 0;
+            printVerbose("Elapsed time: " + (endTime - startTime) + " ms");
+        }
     }
 
     private void printWordAndSentences(String word, Set<String> sentences) {
@@ -39,30 +60,8 @@ public class TextProcessor {
         keys.forEach(key -> printWordAndSentences(key, wordSentencesDict.get(key)));
     }
 
-    public void countWordsOccurenceInTexts(List<Holder> holders, List<String> words) {
-        boolean countWordsOccurence = InputParser.flags.get(new Flag(Flag.Values.COUNT_WORDS_OCCURENCE));
-        if (countWordsOccurence) {
-            printVerbose("Start counting words...");
-            long startTime = verbose ? System.currentTimeMillis() : 0;
-            holders.forEach(holder -> countWords(holder, words));
-            long endTime = verbose ? startTime - System.currentTimeMillis() : 0;
-            printVerbose("Elapsed time: " + (endTime - startTime) + " ms");
-        }
-    }
-
-    public void countCharacters(List<Holder> holders) {
-        boolean countCharactersOfPage = InputParser.flags.get(new Flag(Flag.Values.COUNT_CHARACTERS_OF_PAGE));
-        if (countCharactersOfPage) {
-            printVerbose("Start counting characters...");
-            long startTime = verbose ? System.currentTimeMillis() : 0;
-            holders.forEach(this::countCharacters);
-            long endTime = verbose ? startTime - System.currentTimeMillis() : 0;
-            printVerbose("Elapsed time: " + (endTime - startTime) + " ms");
-        }
-    }
-
     private void extractAllSentencesWithSeveralWords(List<Holder> holders, List<String> words) {
-        boolean extractSentencesWithWord = InputParser.flags.get(new Flag(Flag.Values.EXTRACT_SENTENCES_WITH_WORD));
+        boolean extractSentencesWithWord = Parser.FLAGS.get(new Flag(Flag.Values.EXTRACT_SENTENCES_WITH_WORD));
         if (extractSentencesWithWord) {
             printVerbose("Start extracting sentences...");
             long startTime = verbose ? System.currentTimeMillis() : 0;
@@ -73,7 +72,7 @@ public class TextProcessor {
     }
 
     public void run(List<Holder> holders, List<String> words) {
-        verbose = InputParser.flags.get(new Flag(Flag.Values.VERBOSE));
+        verbose = Parser.FLAGS.get(new Flag(Flag.Values.VERBOSE));
         countWordsOccurenceInTexts(holders, words);
         countCharacters(holders);
         extractAllSentencesWithSeveralWords(holders, words);

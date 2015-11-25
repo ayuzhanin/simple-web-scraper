@@ -30,8 +30,8 @@ public class Flag {
         this.values = values;
     }
 
-    public Flag(char flagSymbol) {
-        switch (flagSymbol) {
+    public Flag(char symbol) {
+        switch (symbol) {
             case 'v':
                 values = Values.VERBOSE;
                 break;
@@ -50,7 +50,7 @@ public class Flag {
         }
     }
 
-    public boolean isProperFlag(){
+    public boolean isLegalFlag(){
         return !(values == Values.NOT_DEFINED);
     }
 

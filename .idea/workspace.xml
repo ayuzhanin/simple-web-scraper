@@ -24,11 +24,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="SimpleWebScraper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/SimpleWebScraper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="TextProcessor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/TextProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="75" column="24" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
+              <caret line="23" column="82" selection-start-line="23" selection-start-column="82" selection-end-line="23" selection-end-column="82" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -36,29 +48,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SimpleWebScraper.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/SimpleWebScraper.java">
+      <file leaf-file-name="Parser.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7716644">
-              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+            <state vertical-scroll-proportion="1.2104539">
+              <caret line="132" column="14" selection-start-line="132" selection-start-column="14" selection-end-line="132" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#690#691#0" expanded="true" />
+                <element signature="e#717#718#0" expanded="true" />
+                <element signature="e#755#756#0" expanded="true" />
+                <element signature="e#783#784#0" expanded="true" />
+                <element signature="e#977#978#0" expanded="true" />
+                <element signature="e#1033#1034#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Flag.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/Flag.java">
+      <file leaf-file-name="ParsingException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/exception/ParsingException.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+              <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
               <folding>
-                <element signature="e#489#490#0" expanded="true" />
-                <element signature="e#531#532#0" expanded="true" />
-                <element signature="e#565#566#0" expanded="true" />
-                <element signature="e#601#602#0" expanded="true" />
-                <element signature="method#equals#0;class#Flag#0" expanded="false" />
+                <element signature="e#179#180#0" expanded="true" />
+                <element signature="e#209#210#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -83,9 +98,7 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/RawTextRetriever.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/exception/ScrappingException.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/exception/RetrievingException.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/TextsHolder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/exception/ParsingException.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/Retriever.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/URLTextHolder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/URLsRetriever.java" />
@@ -98,15 +111,19 @@
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/handlers/base/SentencesExtracter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/handlers/SentencesExtracter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/FlagPair.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/InputParser.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/TextHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/Text.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/Scrappler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/Container.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/Handler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/Processor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/InputParser.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/Flag.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/TextProcessor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/URLRetriever.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/exception/RetrievingException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/exception/ParsingException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/Parser.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/SimpleWebScraper.java" />
       </list>
     </option>
@@ -593,12 +610,12 @@
       <workItem from="1447667728748" duration="21264000" />
       <workItem from="1447782255138" duration="15633000" />
       <workItem from="1448033233019" duration="49004000" />
-      <workItem from="1448381317863" duration="22810000" />
+      <workItem from="1448381317863" duration="26621000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108711000" />
+    <option name="totallyTimeSpent" value="112522000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2" y="5" width="1480" height="864" extended-state="0" />
@@ -711,36 +728,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/exception/ParsingException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-          <folding>
-            <element signature="e#179#180#0" expanded="false" />
-            <element signature="e#209#210#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/exception/RetrievingException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16368638">
-          <caret line="7" column="5" selection-start-line="4" selection-start-column="33" selection-end-line="7" selection-end-column="5" />
-          <folding>
-            <element signature="e#185#186#0" expanded="false" />
-            <element signature="e#215#216#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/URLRetriever.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4551148">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/app.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -751,20 +738,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/InputParser.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/Flag.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.0577717">
-          <caret line="88" column="18" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.11691885">
+          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#392#393#0" expanded="true" />
-            <element signature="e#433#434#0" expanded="true" />
-            <element signature="e#590#591#0" expanded="true" />
-            <element signature="e#622#623#0" expanded="true" />
-            <element signature="e#660#661#0" expanded="true" />
-            <element signature="e#688#689#0" expanded="true" />
-            <element signature="e#884#885#0" expanded="true" />
-            <element signature="e#940#941#0" expanded="true" />
+            <element signature="method#equals#0;class#Flag#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -773,33 +752,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18707015">
           <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
-          <folding />
+          <folding>
+            <element signature="e#382#383#0" expanded="true" />
+            <element signature="e#412#413#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/Text.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71939474">
-          <caret line="86" column="50" selection-start-line="86" selection-start-column="50" selection-end-line="86" selection-end-column="50" />
+        <state vertical-scroll-proportion="1.4731774">
+          <caret line="67" column="25" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/exception/ParsingException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
           <folding>
-            <element signature="e#154#155#0" expanded="true" />
-            <element signature="e#186#187#0" expanded="true" />
-            <element signature="e#991#992#0" expanded="true" />
-            <element signature="e#1027#1028#0" expanded="true" />
+            <element signature="e#179#180#0" expanded="true" />
+            <element signature="e#209#210#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/Flag.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/SimpleWebScraper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="58" />
           <folding>
-            <element signature="e#489#490#0" expanded="true" />
-            <element signature="e#531#532#0" expanded="true" />
-            <element signature="e#565#566#0" expanded="true" />
-            <element signature="e#601#602#0" expanded="true" />
-            <element signature="method#equals#0;class#Flag#0" expanded="false" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -807,19 +791,25 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/TextProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="75" column="24" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
+          <caret line="23" column="82" selection-start-line="23" selection-start-column="82" selection-end-line="23" selection-end-column="82" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/SimpleWebScraper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hireright/job/juniorcandidate/tools/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7716644">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state vertical-scroll-proportion="1.2104539">
+          <caret line="132" column="14" selection-start-line="132" selection-start-column="14" selection-end-line="132" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#690#691#0" expanded="true" />
+            <element signature="e#717#718#0" expanded="true" />
+            <element signature="e#755#756#0" expanded="true" />
+            <element signature="e#783#784#0" expanded="true" />
+            <element signature="e#977#978#0" expanded="true" />
+            <element signature="e#1033#1034#0" expanded="true" />
           </folding>
         </state>
       </provider>

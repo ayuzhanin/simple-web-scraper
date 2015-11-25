@@ -8,21 +8,21 @@ import java.util.stream.Collectors;
 public class SimpleWebScraper {
 
     private List<Holder> holders = null;
-    private InputParser parser = null;
+    private Parser parser = null;
     private TextProcessor textProcessor = null;
 
     public SimpleWebScraper() {
         holders = new ArrayList<>();
-        parser = new InputParser();
+        parser = new Parser();
         textProcessor = new TextProcessor();
     }
 
     public void process(String... args) throws IOException {
         parser.parse(args);
 
-        List<URL> urls = URLRetriever.getURLs(parser.getPathToURL());
+        List<URL> urls = parser.getURLs();
         holders = new ArrayList<>();
-        holders.addAll(urls.stream().map(Holder::new).collect(Collectors.toList()));
+        holders.addAll(parser.getURLs().stream().map(Holder::new).collect(Collectors.toList()));
 
         for (Holder holder : holders) {
             holder.retrieveTextFromURL();

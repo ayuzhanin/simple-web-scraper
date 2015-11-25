@@ -1,6 +1,6 @@
 package com.hireright.job.juniorcandidate.tools;
 
-import com.hireright.job.juniorcandidate.exception.RetrievingException;
+import com.hireright.job.juniorcandidate.exception.ParsingException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class Holder {
         this.url = url;
     }
 
-    public void retrieveTextFromURL() throws RetrievingException {
+    public void retrieveTextFromURL() throws ParsingException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()))) {
             String inputLine;
             StringBuilder builder = new StringBuilder();
@@ -27,9 +27,9 @@ public class Holder {
             text = new Text(builder.toString());
             text.removeHTMLTags();
         } catch (MalformedURLException exception) {
-            throw new RetrievingException("retrieveTextFromURL(" + url.toString() + "): Malformed URL exception has occurred\n");
+            throw new ParsingException("retrieveTextFromURL(" + url.toString() + "): Malformed URL exception has occurred\n");
         } catch (IOException exception) {
-            throw new RetrievingException("retrieveTextFromURL(" + url.toString() + "): I/O exception while retrieving data from URL has occurred\n");
+            throw new ParsingException("retrieveTextFromURL(" + url.toString() + "): I/O exception while retrieving data from URL has occurred\n");
         }
     }
 
