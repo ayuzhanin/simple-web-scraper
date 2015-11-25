@@ -89,8 +89,8 @@ public class TextProcessor {
      * @param word      слово, которое содержат предложения.
      * @param sentences предложения с заданным словом.
      */
-    private void printWordAndSentences(String word, Set<String> sentences) {
-        System.out.println("Sentences with word '" + word + "':");
+    private void printWordAndSentences(TextURLHolder holder, String word, Set<String> sentences) {
+        System.out.println(holder.getUrl().toString() + ": sentences with word '" + word + "':");
         //sentences.forEach(System.out::println);
         int index = 1;
         for (String sentence : sentences) {
@@ -106,9 +106,10 @@ public class TextProcessor {
      * @param words  список слов.
      */
     private void extractAllSentencesWithSeveralWords(TextURLHolder holder, List<String> words) {
+        System.out.println("From: " + holder.getUrl().toString() + "':");
         Map<String, Set<String>> wordSentencesDict = holder.getText().extractAllSentencesWithSeveralWords(words);
         Set<String> keys = wordSentencesDict.keySet();
-        keys.forEach(key -> printWordAndSentences(key, wordSentencesDict.get(key)));
+        keys.forEach(key -> printWordAndSentences(holder, key, wordSentencesDict.get(key)));
     }
 
     /**

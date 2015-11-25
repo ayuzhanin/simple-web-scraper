@@ -4,7 +4,7 @@ import com.hireright.job.juniorcandidate.tools.SimpleWebScraper;
 
 import java.io.IOException;
 
-public class app {
+public class App {
 
     public static void main(String... args)  {
 
