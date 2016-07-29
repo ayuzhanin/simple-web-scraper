@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.*;
 
 
-class Text {
+class Page {
 
     private class Cleaner {
 
@@ -66,7 +66,7 @@ class Text {
         return cleaner.removeSpecialCharacters(string);
     }
 
-    void obtainCleanPageContent(URL url) throws ProcessingException {
+    void clean(URL url) throws ProcessingException {
         String raw = getRawText(url);
         text = removeSpecialCharacters(raw);
     }
