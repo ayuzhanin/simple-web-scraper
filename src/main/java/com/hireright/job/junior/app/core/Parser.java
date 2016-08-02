@@ -14,7 +14,7 @@ class Parser {
 
     private HashMap<Task, Boolean> tasks;
 
-    private PrintStream printer;
+    private PrintWriter writer;
 
     List<String> getWords() {
         return words;
@@ -28,8 +28,8 @@ class Parser {
         return tasks;
     }
 
-    PrintStream getPrinter() {
-        return printer;
+    PrintWriter getWriter() {
+        return writer;
     }
 
     private List<String> toList(String... args) {
@@ -108,18 +108,20 @@ class Parser {
         }
     }
 
-    private PrintStream toPrinter(String path) throws ParsingException {
-        PrintStream printStream;
+    private PrintWriter toWriter(String path) throws ParsingException {
+        PrintWriter printWriter;
         if (path.equals("_")) {
-            printStream = System.out;
+            printWriter = new PrintWriter(System.out);
         } else {
             try {
-                printStream = new PrintStream(new FileOutputStream(path, true));
+                File file = new File(path);
+                file.getParentFile().mkdirs();
+                printWriter = new PrintWriter(file);
             } catch (FileNotFoundException ex) {
                 throw new ParsingException(ex);
             }
         }
-        return printStream;
+        return printWriter;
     }
 
     private HashMap<Task, Boolean> toTasks (List<String> flags){
@@ -141,7 +143,7 @@ class Parser {
         URLs = toURLs(pathToURLs);
 
         String pathToWrite = getPathToWrite(input);
-        printer = toPrinter(pathToWrite);
+        writer = toWriter(pathToWrite);
 
         words = getWords(input);
 

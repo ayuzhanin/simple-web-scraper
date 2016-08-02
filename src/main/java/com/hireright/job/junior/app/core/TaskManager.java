@@ -31,16 +31,8 @@ class TaskManager {
         this.words = words;
     }
 
-    public URL getUrl() {
+    URL getUrl() {
         return url;
-    }
-
-    public Page getPage() {
-        return page;
-    }
-
-    public List<String> getWords() {
-        return words;
     }
 
     WordOccurrences getWordOccurrences() {
@@ -61,7 +53,7 @@ class TaskManager {
             long start = System.nanoTime();
             occurrences.update(word, page.getNumberOfOccurrences(word));
             long finish = System.nanoTime();
-            occurrences.addTime(finish - start);
+            occurrences.addTime(word, (finish - start) / 1_000_000);
         });
         return occurrences;
     }
@@ -70,19 +62,29 @@ class TaskManager {
         long start = System.nanoTime();
         int count = page.getNumberOfCharacters();
         long finish = System.nanoTime();
-        return new NumberOfCharacters(count, finish - start);
+        return new NumberOfCharacters(count, (finish - start) / 1_000_000);
     }
 
+    /**
+     * Need refactor
+     * @return
+     */
+
     private WordsToSentencesMap obtainWordsToSentencesMap() {
-        long start = System.nanoTime();
-        Map<String, Set<String>> map = page.getSentences(words);
-        long finish = System.nanoTime();
-        return new WordsToSentencesMap(map, finish - start);
+        Map<String, Set<String>> sentences = new HashMap<>();
+        Map<String, Long> time = new HashMap<>();
+        words.forEach(word -> {
+            long start = System.nanoTime();
+            sentences.put(word, page.getSentences(word));
+            long finish = System.nanoTime();
+            time.put(word, (finish-start) / 1_000_000);
+        });
+        return new WordsToSentencesMap(sentences, time);
     }
 
     private Page getCleanPage(URL url) throws ProcessingException {
         Page page = new Page();
-        page.clean(url);
+        page.run(url);
         return page;
     }
 

@@ -1,32 +1,41 @@
 package com.hireright.job.junior.app.core.result;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+/**
+ * Represents word occurrences in text.
+ * Similar to NumberOfCharacters text should be specific characters free.
+ * Class contains occurrences where a key is the word and a value is an occurrence.
+ *
+ */
 public class WordOccurrences {
-    private Map<String, Integer> map;
-    private List<Long> times;
+    /**
+     * Map for words and their occurrences
+     */
+    private Map<String, Integer> occurrences;
+    /**
+     * Map for words and elapsed time for getting number of occurrences
+     */
+    private Map<String, Long> times;
 
     public WordOccurrences() {
-        this.map = new LinkedHashMap<>();
-        this.times = new ArrayList<>();
+        this.occurrences = new HashMap<>();
+        this.times = new HashMap<>();
     }
 
     public void update(String word, Integer times) {
-        map.put(word, times);
+        occurrences.put(word, times);
     }
 
-    public Map<String, Integer> getMap() {
-        return map;
+    public void addTime(String word, long time) {
+        times.put(word, time);
     }
 
-    public List<Long> getTimes() {
+    public Map<String, Integer> getOccurrences() {
+        return occurrences;
+    }
+
+    public Map<String, Long> getTimes() {
         return times;
-    }
-
-    public void addTime(long time) {
-        times.add(time);
     }
 }

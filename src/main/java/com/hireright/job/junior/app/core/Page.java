@@ -9,9 +9,15 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * Class for web-page
+ */
 
 class Page {
 
+    /**
+     * Inner private class which is used for removing HTML and CSS tags, and JavaScript code
+     */
     private class Cleaner {
 
         private static final String JS_START = "<script";
@@ -22,20 +28,47 @@ class Page {
 
         private static final String CSS_END = "</style>";
 
+        /**
+         * Methog for removing substring from a given string
+         *
+         * Example:
+         * For a given a string
+         * "<script>bla-bla-bla</script>1<script>hello there</script>2<script>i love github</script>"
+         * if start = "<script>" and end="</script>" then
+         * result if "12"
+         *
+         * @param string string for proceed
+         * @param start string indicates a start of substring for removing
+         * @param end string indicates an end of substring for removing
+         * @return substring without a substring or substring without several copies of such substring
+         * or string itself if substring not found
+         */
         private StringBuilder removeSubstring(StringBuilder string, String start, String end) {
             int startIndex = string.indexOf(start);
             int endIndex = string.indexOf(end);
             if (startIndex == -1 || endIndex == -1) {
                 return string;
+            } else {
+                StringBuilder iterated = new StringBuilder(string).delete(startIndex, endIndex + end.length());
+                return removeSubstring(iterated, start, end);
             }
-            return new StringBuilder(string).delete(startIndex, endIndex + end.length());
         }
 
+        /**
+         * Removes html tags from given text
+         * @param someString given text
+         * @return cleared string
+         */
         private StringBuilder removeHTML(StringBuilder someString) {
             String string = someString.toString().replaceAll("<[^>]*>", "");
             return new StringBuilder(string);
         }
 
+        /**
+         * Removes HTML, CSS and JS symbols
+         * @param string string to proceed
+         * @return cleared string
+         */
         String removeSpecialCharacters(String string) {
             StringBuilder builder = new StringBuilder(string);
             builder = removeSubstring(builder, JS_START, JS_END);
@@ -45,8 +78,17 @@ class Page {
         }
     }
 
+    /**
+     * Content of web-page
+     */
     private String text;
 
+    /**
+     * Gets a raw text from a given url. Read "raw" as "with html, css and js")
+     * @param url address of a web-page
+     * @return string which contains raw text of web-page
+     * @throws ProcessingException if something is wrong while retrieving text
+     */
     private String getRawText(URL url) throws ProcessingException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()))) {
             String input;
@@ -61,12 +103,22 @@ class Page {
         }
     }
 
+    /**
+     * Removes all HTML, CSS and JS from a given string which represents a web-page
+     * @param string string to proceed
+     * @return purified content of web-page
+     */
     private String removeSpecialCharacters(String string) {
         Cleaner cleaner = new Cleaner();
         return cleaner.removeSpecialCharacters(string);
     }
 
-    void clean(URL url) throws ProcessingException {
+    /**
+     * Gets a raw content from a given url and converts it into purified
+     * @param url a given url
+     * @throws ProcessingException if something goes wrong
+     */
+    void run(URL url) throws ProcessingException {
         String raw = getRawText(url);
         text = removeSpecialCharacters(raw);
     }
@@ -126,21 +178,12 @@ class Page {
         return text.substring(start, end + 1).trim();
     }
 
-    private Set<String> getSentences(String word) {
+    Set<String> getSentences(String word) {
         Set<String> sentences = new HashSet<>();
         int index = 0;
         while ((index = text.indexOf(word, index)) != -1 && index < text.length()) {
             sentences.add(getSentence(index));
             index += word.length();
-        }
-        return sentences;
-    }
-
-    Map<String, Set<String>> getSentences(List<String> words) {
-        Map<String, Set<String>> sentences = new HashMap<>();
-        for (String word : words) {
-            Set<String> sentencesForSingleWord = getSentences(word);
-            sentences.put(word, sentencesForSingleWord);
         }
         return sentences;
     }
