@@ -16,7 +16,7 @@ Console [web scraper](http://en.wikipedia.org/wiki/Web_scraping) utility for [Hi
 ### Packaging
 Clone the project and run
 ```sh
-clean package jar:jar
+mvn clean package jar:jar
 ```
 Now check `./target/` directory for `scrapper.jar` artifact.
 
